@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <style>
-  @import url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy@1.0/Paperlogy.css');
+  @import url('https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css');
 
   * { font-family: 'Paperlogy', 'Noto Sans KR', sans-serif; }
 
@@ -24,36 +24,66 @@
     width: var(--sidebar-w);
     position: fixed;
     top: 0; left: 0; bottom: 0;
-    background: #111827;
+    background: #fff;
+    border-right: 1px solid #e5e7eb;
     overflow-y: auto;
     z-index: 50;
   }
-  #sidebar::-webkit-scrollbar { width: 4px; }
-  #sidebar::-webkit-scrollbar-thumb { background: #374151; border-radius: 2px; }
+  #sidebar::-webkit-scrollbar { width: 3px; }
+  #sidebar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
 
+  /* 사이드바 헤더 */
+  .sidebar-header {
+    padding: 24px 20px 18px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .sidebar-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: #dc2626; margin-bottom: 8px;
+  }
+  .sidebar-title {
+    font-size: 15px; font-weight: 900; line-height: 1.35;
+    color: #111827; letter-spacing: -.3px;
+  }
+
+  /* 네비게이션 아이템 */
   .nav-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 20px; color: #9ca3af;
-    text-decoration: none; font-size: 13px; font-weight: 500;
-    border-left: 3px solid transparent;
-    transition: all .2s;
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 12px; margin: 2px 10px;
+    text-decoration: none;
+    border-radius: 9px;
+    transition: all .18s;
+    cursor: pointer;
   }
-  .nav-item:hover, .nav-item.active {
-    color: #fff; background: #1f2937;
-    border-left-color: #dc2626;
+  .nav-item:hover { background: #f9fafb; }
+  .nav-item.active { background: #dc2626; }
+
+  /* 번호 배지 */
+  .nav-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800;
+    flex-shrink: 0;
+    background: #f3f4f6; color: #6b7280;
+    transition: all .18s;
   }
-  .nav-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #374151; flex-shrink: 0;
-    transition: background .2s;
+  .nav-item:hover .nav-num { background: #fee2e2; color: #dc2626; }
+  .nav-item.active .nav-num { background: rgba(255,255,255,0.22); color: #fff; }
+
+  /* 네비 텍스트 */
+  .nav-label {
+    font-size: 13px; font-weight: 600;
+    color: #374151; transition: color .18s;
+    line-height: 1.2;
   }
-  .nav-item:hover .nav-dot, .nav-item.active .nav-dot {
-    background: #dc2626;
-  }
+  .nav-item:hover .nav-label { color: #111827; }
+  .nav-item.active .nav-label { color: #fff; font-weight: 700; }
+
+  /* 섹션 구분 라벨 */
   .nav-section-title {
-    padding: 18px 20px 6px;
-    font-size: 10px; font-weight: 700;
-    color: #4b5563; letter-spacing: .1em; text-transform: uppercase;
+    padding: 14px 22px 4px;
+    font-size: 9px; font-weight: 700;
+    color: #9ca3af; letter-spacing: .15em; text-transform: uppercase;
   }
 
   /* 메인 */
@@ -147,31 +177,54 @@
 
 <!-- ══════════════════ SIDEBAR ══════════════════ -->
 <nav id="sidebar">
-  <div class="p-5 border-b border-gray-800">
-    <div class="flex items-center gap-2 mb-1">
-      <span style="font-size:22px;">🧬</span>
-      <span class="text-white font-black text-base tracking-tight">슈퍼에이저</span>
-    </div>
-    <p class="text-gray-500 text-xs">Super Agers Insight Dashboard</p>
-    <p class="text-gray-600 text-xs mt-1">Based on Eric Topol's Research</p>
+  <div class="sidebar-header">
+    <p class="sidebar-eyebrow">HEALTH INSIGHT · 2026</p>
+    <p class="sidebar-title">슈퍼에이저의 비밀<br>건강수명 극대화</p>
+    <p style="font-size:11px;color:#9ca3af;margin-top:8px;">Based on Eric Topol's Research</p>
   </div>
 
-  <div class="nav-section-title">개요</div>
-  <a href="#overview" class="nav-item active"><span class="nav-dot"></span>슈퍼에이저란?</a>
-  <a href="#kpi" class="nav-item"><span class="nav-dot"></span>핵심 수치</a>
+  <div class="pt-3 pb-2">
+    <div class="nav-section-title">개요</div>
+    <a href="#overview" class="nav-item active">
+      <span class="nav-num">1</span>
+      <span class="nav-label">슈퍼에이저란?</span>
+    </a>
+    <a href="#kpi" class="nav-item">
+      <span class="nav-num">2</span>
+      <span class="nav-label">핵심 수치</span>
+    </a>
 
-  <div class="nav-section-title">3대 기둥</div>
-  <a href="#exercise" class="nav-item"><span class="nav-dot"></span>운동</a>
-  <a href="#sleep" class="nav-item"><span class="nav-dot"></span>수면</a>
-  <a href="#diet" class="nav-item"><span class="nav-dot"></span>식단</a>
+    <div class="nav-section-title">3대 기둥</div>
+    <a href="#exercise" class="nav-item">
+      <span class="nav-num">3</span>
+      <span class="nav-label">운동</span>
+    </a>
+    <a href="#sleep" class="nav-item">
+      <span class="nav-num">4</span>
+      <span class="nav-label">수면</span>
+    </a>
+    <a href="#diet" class="nav-item">
+      <span class="nav-num">5</span>
+      <span class="nav-label">식단</span>
+    </a>
 
-  <div class="nav-section-section-title nav-section-title">확장 요소</div>
-  <a href="#lifestyle" class="nav-item"><span class="nav-dot"></span>라이프스타일+</a>
-  <a href="#medtech" class="nav-item"><span class="nav-dot"></span>첨단 의료 기술</a>
-  <a href="#action" class="nav-item"><span class="nav-dot"></span>실천 로드맵</a>
+    <div class="nav-section-title">확장 전략</div>
+    <a href="#lifestyle" class="nav-item">
+      <span class="nav-num">6</span>
+      <span class="nav-label">라이프스타일+</span>
+    </a>
+    <a href="#medtech" class="nav-item">
+      <span class="nav-num">7</span>
+      <span class="nav-label">첨단 의료 기술</span>
+    </a>
+    <a href="#action" class="nav-item">
+      <span class="nav-num">8</span>
+      <span class="nav-label">실천 로드맵</span>
+    </a>
+  </div>
 
-  <div class="p-5 mt-4 border-t border-gray-800">
-    <p class="text-gray-600 text-xs">출처: Eric Topol, <em>Super Agers</em> & Ground Truths Newsletter</p>
+  <div style="padding:16px 20px;margin-top:8px;border-top:1px solid #f3f4f6;">
+    <p style="font-size:10px;color:#9ca3af;line-height:1.5;">출처: Eric Topol, <em>Super Agers</em><br>& Ground Truths Newsletter</p>
   </div>
 </nav>
 
@@ -812,7 +865,7 @@ const observer = new IntersectionObserver((entries) => {
       if (active) active.classList.add('active');
     }
   });
-}, { threshold: 0.3 });
+}, { threshold: 0.25, rootMargin: '-10% 0px -60% 0px' });
 
 sections.forEach(s => observer.observe(s));
 </script>
